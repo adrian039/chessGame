@@ -173,7 +173,9 @@ public class MoveValidator {
 				// same column
 				if(  sourcePiece.getColor() == Piece.COLOR_WHITE ){
 					// white
-					if( sourceRow+1 == targetRow ){
+					if((targetRow==3)&&(sourceRow==1)){
+						isValid=true;
+					}else if( sourceRow+1 == targetRow ){
 						// move one up
 						isValid = true;
 					}else{
@@ -182,7 +184,9 @@ public class MoveValidator {
 					}
 				}else{
 					// black
-					if( sourceRow-1 == targetRow ){
+					if((targetRow==4)&&(sourceRow==6)){
+						isValid=true;
+					}else if( sourceRow-1 == targetRow ){
 						// move one down
 						isValid = true;
 					}else{
@@ -365,7 +369,7 @@ public class MoveValidator {
 			
 		}else{
 			// not moving diagonally
-			System.out.println("not moving straight");
+		//	System.out.println("not moving straight");
 			isValid = false;
 		}
 		

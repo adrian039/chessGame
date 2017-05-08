@@ -1,7 +1,10 @@
 package ChessLogic;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import Game.SerialTest;
 
 public class ChessGame {
 

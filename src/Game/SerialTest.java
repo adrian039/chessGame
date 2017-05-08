@@ -15,13 +15,12 @@ import GameCommunication.IConstants;
 import GameCommunication.JsonCreator;
 import GameCommunication.SerialPortManager;
 import TCPServer.Server;
-import TCPServer.ServerMain;
 
 
 public class SerialTest implements SerialPortEventListener {
 	SerialPort serialPort;
 	static Game juego;
-	ServerMain server;
+	
 	public static String strSourceColumn;
 	public static String strSourceRow;
 	public static String strTargetColumn;

@@ -45,8 +45,8 @@ public class ClientThread implements Runnable {
 			writer = ServerWriter.setserverwriter(this);
 			reader = new ServerReader(this);
 			reader.Thread();
-			ServerMessageSend sender = new ServerMessageSend(this);
-			sender.setVisible(true);
+		//	ServerMessageSend sender = new ServerMessageSend(this);
+			//sender.setVisible(true);
 			
 		}
 		catch(Exception e){

@@ -18,20 +18,20 @@ public class Game {
 	
 	
 	public void handleMove(String input) throws IOException {
-		String strSourceColumn = input.substring(0, 1);
-		String strSourceRow = input.substring(1, 2);
-		String strTargetColumn = input.substring(3, 4);
-		String strTargetRow = input.substring(4, 5);
+		 SerialTest.strSourceColumn = input.substring(0, 1);
+		 SerialTest.strSourceRow = input.substring(1, 2);
+		 SerialTest.strTargetColumn = input.substring(3, 4);
+		 SerialTest.strTargetRow = input.substring(4, 5);
 
 		int sourceColumn = 0;
 		int sourceRow = 0;
 		int targetColumn = 0;
 		int targetRow = 0;
 
-		sourceColumn = convertColumnStrToColumnInt(strSourceColumn);
-		sourceRow = convertRowStrToRowInt(strSourceRow);
-		targetColumn = convertColumnStrToColumnInt(strTargetColumn);
-		targetRow = convertRowStrToRowInt(strTargetRow);
+		sourceColumn = convertColumnStrToColumnInt(SerialTest.strSourceColumn);
+		sourceRow = convertRowStrToRowInt(SerialTest.strSourceRow);
+		targetColumn = convertColumnStrToColumnInt(SerialTest.strTargetColumn);
+		targetRow = convertRowStrToRowInt(SerialTest.strTargetRow);
 
 		chessGame.movePiece(sourceRow, sourceColumn, targetRow, targetColumn);
 	}

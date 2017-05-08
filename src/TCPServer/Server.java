@@ -16,7 +16,7 @@ public class Server implements Runnable {
 	
 	private ServerSocket sSocket;
 	public Socket socket;
-	private ClientThread client;
+	public ClientThread client;
 	private static Server server;
 	private int numero = 0;
 	private String ipdirection;
@@ -41,7 +41,7 @@ public class Server implements Runnable {
 	private Server(){
 		
 		try{
-			sSocket = new ServerSocket(8080);
+			sSocket = new ServerSocket(3672);
 			thread = new Thread(this);
 			thread.start();
 			System.out.println("Server started at: "+ new Date());

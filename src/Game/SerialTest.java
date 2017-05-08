@@ -9,7 +9,12 @@ import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener; 
 import java.util.Enumeration;
 
+import org.json.simple.JSONObject;
+
+import GameCommunication.IConstants;
+import GameCommunication.JsonCreator;
 import GameCommunication.SerialPortManager;
+import TCPServer.Server;
 import TCPServer.ServerMain;
 
 
@@ -17,6 +22,11 @@ public class SerialTest implements SerialPortEventListener {
 	SerialPort serialPort;
 	static Game juego;
 	ServerMain server;
+	public static String strSourceColumn;
+	public static String strSourceRow;
+	public static String strTargetColumn;
+	public static String strTargetRow;
+	public static int cont=0;
         /** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { 
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
@@ -43,7 +53,6 @@ public class SerialTest implements SerialPortEventListener {
                 // the next line is for Raspberry Pi and 
                 // gets us into the while loop and was suggested here was suggested http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
               //System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
-
 		CommPortIdentifier portId = null;
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
@@ -76,12 +85,11 @@ public class SerialTest implements SerialPortEventListener {
 			// open the streams
 			input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
 			output = serialPort.getOutputStream();
-			SerialPortManager.getInstance().setOutput(output);
+		    SerialPortManager.getInstance().setOutput(output);
 
 			// add event listeners
 			serialPort.addEventListener(this);
 			serialPort.notifyOnDataAvailable(true);
-			System.out.println("hola");
 		} catch (Exception e) {
 			System.err.println(e.toString());
 		}
@@ -106,7 +114,15 @@ public class SerialTest implements SerialPortEventListener {
 			try {
 				String inputLine=input.readLine();
 				System.out.println(inputLine);
-				juego.handleMove(inputLine);
+				if(inputLine.equals("1111")){
+					JSONObject json= JsonCreator.getInstance().createJson();
+					JsonCreator.getInstance().addData(json, IConstants.k_instruction, IConstants.v_init);
+					JsonCreator.getInstance().addData(json, IConstants.k_number, 0);
+					System.out.println(json);
+					Server.getServer().client.writer.send(json.toString());
+				}else{
+					juego.handleMove(inputLine);
+				}
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
@@ -127,5 +143,6 @@ public class SerialTest implements SerialPortEventListener {
 		};
 		t.start();
 		System.out.println("Iniciado");
+		Server.getServer().run();
 	}
 }

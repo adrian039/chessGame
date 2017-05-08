@@ -5,8 +5,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import Game.SerialTest;
+import GameCommunication.IConstants;
+import GameCommunication.JsonCreator;
 import GameCommunication.SerialPortManager;
+import TCPServer.Server;
 
 public class ChessGame {
 
@@ -103,11 +108,21 @@ public class ChessGame {
 	 */
 	public boolean movePiece(int sourceRow, int sourceColumn, int targetRow,
 			int targetColumn) throws IOException {
-
+		String source=SerialTest.strSourceColumn+SerialTest.strSourceRow;
+		String target=SerialTest.strTargetColumn+SerialTest.strTargetRow;
+		SerialTest.cont++;
+		JSONObject json=JsonCreator.getInstance().createJson();
+		JsonCreator.getInstance().addData(json, IConstants.k_instruction, IConstants.v_move);
+		JsonCreator.getInstance().addData(json, IConstants.k_number, SerialTest.cont);
+		JsonCreator.getInstance().addData(json, IConstants.k_source, source);
+		JsonCreator.getInstance().addData(json, IConstants.k_target, target);
 		if (!this.moveValidator.isMoveValid(sourceRow, sourceColumn, targetRow,
 				targetColumn)) {
 			System.out.println("move invalid");
 			SerialPortManager.getInstance().writeUsb(0);
+			JsonCreator.getInstance().addData(json, IConstants.k_condition, 0);
+			Server.getServer().client.writer.send(json.toString());
+			System.out.println(json);
 			return false;
 		}
 
@@ -130,7 +145,9 @@ public class ChessGame {
 			this.changeGameState();
 		}
 		SerialPortManager.getInstance().writeUsb(1);
-
+		JsonCreator.getInstance().addData(json, IConstants.k_condition, 1);
+		System.out.println(json);
+		Server.getServer().client.writer.send(json.toString());
 		return true;
 	}
 

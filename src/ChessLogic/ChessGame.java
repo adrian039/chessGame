@@ -108,8 +108,8 @@ public class ChessGame {
 	 */
 	public boolean movePiece(int sourceRow, int sourceColumn, int targetRow,
 			int targetColumn) throws IOException {
-		String source=SerialTest.strSourceColumn+SerialTest.strSourceRow;
-		String target=SerialTest.strTargetColumn+SerialTest.strTargetRow;
+		String source=SerialTest.strSourceColumn+" "+SerialTest.strSourceRow;
+		String target=SerialTest.strTargetColumn+" "+SerialTest.strTargetRow;
 		SerialTest.cont++;
 		JSONObject json=JsonCreator.getInstance().createJson();
 		JsonCreator.getInstance().addData(json, IConstants.k_instruction, IConstants.v_move);

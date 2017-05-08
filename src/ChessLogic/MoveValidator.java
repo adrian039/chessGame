@@ -1,5 +1,6 @@
 package ChessLogic;
 
+import java.io.IOException;
 
 /**
  * reference
@@ -402,7 +403,7 @@ public class MoveValidator {
 		return false;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		ChessGame ch = new ChessGame();
 		MoveValidator mo = new MoveValidator(ch);
 		boolean isValid;

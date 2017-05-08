@@ -1,5 +1,7 @@
 package Game;
 
+import java.io.IOException;
+
 import ChessLogic.ChessGame;
 import ChessLogic.Piece;
 
@@ -15,7 +17,7 @@ public class Game {
 	}
 	
 	
-	public void handleMove(String input) {
+	public void handleMove(String input) throws IOException {
 		String strSourceColumn = input.substring(0, 1);
 		String strSourceRow = input.substring(1, 2);
 		String strTargetColumn = input.substring(3, 4);

@@ -9,6 +9,7 @@ import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener; 
 import java.util.Enumeration;
 
+import GameCommunication.SerialPortManager;
 import TCPServer.ServerMain;
 
 
@@ -75,6 +76,7 @@ public class SerialTest implements SerialPortEventListener {
 			// open the streams
 			input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
 			output = serialPort.getOutputStream();
+			SerialPortManager.getInstance().setOutput(output);
 
 			// add event listeners
 			serialPort.addEventListener(this);

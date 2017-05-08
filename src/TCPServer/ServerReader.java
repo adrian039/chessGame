@@ -44,7 +44,7 @@ public class ServerReader implements Runnable {
 				System.out.println(cliente.entrada);
 				if (cliente.entrada != null){
 					if(cliente.entrada.contains("{")){
-						Protocol.getInstance().handleFunction(cliente.entrada);	
+						//Protocol.getInstance().handleFunction(cliente.entrada);	
 					}
 				}
 

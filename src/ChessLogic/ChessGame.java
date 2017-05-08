@@ -1,10 +1,12 @@
 package ChessLogic;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import Game.SerialTest;
+import GameCommunication.SerialPortManager;
 
 public class ChessGame {
 
@@ -97,13 +99,15 @@ public class ChessGame {
 	 * @param targetRow the target row (Piece.ROW_..)
 	 * @param targetColumn the target column (Piece.COLUMN_..)
 	 * @return true, if piece was moved successfully
+	 * @throws IOException 
 	 */
 	public boolean movePiece(int sourceRow, int sourceColumn, int targetRow,
-			int targetColumn) {
+			int targetColumn) throws IOException {
 
 		if (!this.moveValidator.isMoveValid(sourceRow, sourceColumn, targetRow,
 				targetColumn)) {
 			System.out.println("move invalid");
+			SerialPortManager.getInstance().writeUsb(0);
 			return false;
 		}
 
@@ -125,6 +129,8 @@ public class ChessGame {
 		} else {
 			this.changeGameState();
 		}
+		SerialPortManager.getInstance().writeUsb(1);
+
 		return true;
 	}
 

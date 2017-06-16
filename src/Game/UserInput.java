@@ -53,12 +53,18 @@ public class UserInput extends JFrame {
 		contentPane.add(btnPlay);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pGame.saveGame(lblChessgame.getText());
+			}
+		});
 		btnSave.setBounds(189, 113, 117, 29);
 		contentPane.add(btnSave);
 		
 		JButton btnLoad = new JButton("Load");
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				pGame.loadGame(lblChessgame.getText());
 			}
 		});
 		btnLoad.setBounds(59, 113, 117, 29);

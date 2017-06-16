@@ -45,7 +45,6 @@ public class Game {
 			handleMove(inst);
 			wait(10000);
 			cont++;
-			
 		} catch (IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

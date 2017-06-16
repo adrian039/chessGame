@@ -11,6 +11,7 @@ import Game.SerialTest;
 import GameCommunication.IConstants;
 import GameCommunication.JsonCreator;
 import GameCommunication.SerialPortManager;
+import GameCommunication.TxtWriter;
 import TCPServer.Server;
 
 public class ChessGame {
@@ -19,6 +20,7 @@ public class ChessGame {
 	public static final int GAME_STATE_WHITE = 0;
 	public static final int GAME_STATE_BLACK = 1;
 	public static final int GAME_STATE_END = 2;
+	private TxtWriter _writer;
 
 	// 0 = bottom, size = top
 	private List<Piece> pieces = new ArrayList<Piece>();
@@ -29,7 +31,7 @@ public class ChessGame {
 	 * initialize game
 	 */
 	public ChessGame() {
-
+		_writer = new TxtWriter();
 		this.moveValidator = new MoveValidator(this);
 
 		// create and place pieces

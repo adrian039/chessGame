@@ -121,6 +121,7 @@ public class SerialTest implements SerialPortEventListener {
 					Server.getServer().client.writer.send(json.toString());
 				}else{
 					juego.handleMove(inputLine);
+					juego.saveMoves(inputLine);
 				}
 			} catch (Exception e) {
 				System.err.println(e.toString());

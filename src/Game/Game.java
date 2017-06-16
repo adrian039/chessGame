@@ -1,28 +1,63 @@
 package Game;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import ChessLogic.ChessGame;
 import ChessLogic.Piece;
+import GameCommunication.TxtReader;
+import GameCommunication.TxtWriter;
 
 public class Game {
 	
 	private ChessGame chessGame;
-	
+	private ArrayList<String> _move;
+	private TxtWriter _writer;
+	private TxtReader _reader;
 	public Game() {
-
+		_writer = new TxtWriter();
+		_reader = new TxtReader();
+		_move = new ArrayList<String>();
 		// create a new chess game
 		//
 		this.chessGame = new ChessGame();
 	}
 	
-	
+	public void saveMoves(String input){
+		_move.add(input);
+		 System.out.println(_move.toString());
+	}
+	public void saveGame(String file){
+		int cont = 0;
+		while(cont<_move.size()){
+		String move = _move.get(cont);
+		_writer.writeInFile(move, file);
+		cont++;
+		}
+	}
+	public void loadGame(String pFile){
+		_reader.openFile(pFile);
+		int total = _reader.lineCounter(pFile);
+		int cont =0 ;
+		while(total>cont){
+		  try {
+			String inst = _reader.readLine(cont);
+			handleMove(inst);
+			wait(10000);
+			cont++;
+			
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		
+	}
 	public void handleMove(String input) throws IOException {
 		 SerialTest.strSourceColumn = input.substring(0, 1);
 		 SerialTest.strSourceRow = input.substring(1, 2);
 		 SerialTest.strTargetColumn = input.substring(3, 4);
 		 SerialTest.strTargetRow = input.substring(4, 5);
-
 		int sourceColumn = 0;
 		int sourceRow = 0;
 		int targetColumn = 0;

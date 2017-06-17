@@ -27,7 +27,7 @@ public class TxtReader {
 		while(x<pLine){
 		try {
 			 line = _bufferedReader.readLine();
-			 System.out.println("leyendo linea "+x);
+			 //System.out.println("leyendo linea "+x);
 			 x++;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

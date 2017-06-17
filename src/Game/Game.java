@@ -37,12 +37,13 @@ public class Game {
 		}
 	}
 	public void loadGame(String pFile){
-		_reader.openFile(pFile);
-		int total = _reader.lineCounter(pFile);
-		int cont =0 ;
-		while(total>cont){
+		int total = _move.size();
+		int cont =1;
+		while(total>=cont){
 		  try {
+			_reader.openFile(pFile);
 			String inst = _reader.readLine(cont);
+			_reader.closeFile();
 			handleMove(inst);
 			wait(10000);
 			cont++;

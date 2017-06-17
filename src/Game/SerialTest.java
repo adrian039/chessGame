@@ -133,7 +133,9 @@ public class SerialTest implements SerialPortEventListener {
 	public static void main(String[] args) throws Exception {
 		SerialTest main = new SerialTest();
 		juego = new Game();
+		UserInput user = new UserInput(juego);
 		main.initialize();
+		user.setVisible(true);
 		Thread t=new Thread() {
 			public void run() {
 				//the following line will keep this app alive for 1000 seconds,

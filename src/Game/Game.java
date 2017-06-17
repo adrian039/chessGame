@@ -1,7 +1,6 @@
 package Game;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 
 import ChessLogic.ChessGame;
@@ -13,7 +12,6 @@ public class Game {
 	
 	private ChessGame chessGame;
 	private ArrayList<String> _move;
-
 	private TxtReader _reader;
 	public Game() {
 		_reader = new TxtReader();
@@ -29,26 +27,32 @@ public class Game {
 	}
 	public void saveGame(String file){
 		int cont = 0;
-		TxtWriter _writer = new TxtWriter(file);
+       TxtWriter _writer= new TxtWriter(file);
 		while(cont<_move.size()){
 		String move = _move.get(cont);
 		_writer.writeInFile(move);
 		cont++;
 		}
+		_writer.writeInFile("end");
 		_writer.closeFile();
 	}
 	public void loadGame(String pFile){
-		int total = _move.size();
-		int cont =1;
-		while(total>=cont){
+		int cont =1 ;
+		while(true){
 		  try {
-			_reader.openFile(pFile);
+			 _reader.openFile(pFile);
 			String inst = _reader.readLine(cont);
 			_reader.closeFile();
-			handleMove(inst);
-			wait(10000);
-			cont++;
-		} catch (IOException | InterruptedException e) {
+			if(inst.compareTo("end")==0){
+				return;
+			}
+			else{
+				handleMove(inst);
+				cont++;
+				Thread.sleep(3000);
+			}
+
+		  } catch (IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -56,6 +60,7 @@ public class Game {
 		
 	}
 	public void handleMove(String input) throws IOException {
+		System.out.println(input);
 		 SerialTest.strSourceColumn = input.substring(0, 1);
 		 SerialTest.strSourceRow = input.substring(1, 2);
 		 SerialTest.strTargetColumn = input.substring(3, 4);

@@ -55,7 +55,7 @@ public class UserInput extends JFrame {
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pGame.saveGame(lblChessgame.getText());
+				pGame.saveGame(textField.getText());
 			}
 		});
 		btnSave.setBounds(189, 113, 117, 29);

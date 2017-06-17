@@ -6,8 +6,9 @@ public class TxtWriter {
 	private String _file;
 	private FileWriter _writer;
 	private BufferedWriter _buffer;
-	public TxtWriter(){
-		
+	public TxtWriter(String pFile){
+		_file = pFile;
+		openFile();
 		
 }
 	
@@ -33,13 +34,10 @@ public class TxtWriter {
 	
 
 	
-	public void writeInFile(String pData, String pFile){
-		_file = pFile;
-		openFile();
+	public void writeInFile(String pData){
 		try {
 			_buffer.write(pData);
 			_buffer.newLine();
-			closeFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

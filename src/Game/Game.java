@@ -1,6 +1,7 @@
 package Game;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 
 import ChessLogic.ChessGame;
@@ -12,10 +13,9 @@ public class Game {
 	
 	private ChessGame chessGame;
 	private ArrayList<String> _move;
-	private TxtWriter _writer;
+
 	private TxtReader _reader;
 	public Game() {
-		_writer = new TxtWriter();
 		_reader = new TxtReader();
 		_move = new ArrayList<String>();
 		// create a new chess game
@@ -29,9 +29,10 @@ public class Game {
 	}
 	public void saveGame(String file){
 		int cont = 0;
+		TxtWriter _writer = new TxtWriter(file);
 		while(cont<_move.size()){
 		String move = _move.get(cont);
-		_writer.writeInFile(move, file);
+		_writer.writeInFile(move);
 		cont++;
 		}
 	}

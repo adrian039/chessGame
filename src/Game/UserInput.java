@@ -41,8 +41,8 @@ public class UserInput extends JFrame {
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					pGame.handleMove(lblChessgame.getText());
-					pGame.saveMoves(lblChessgame.getText());
+					pGame.handleMove(textField.getText());
+					pGame.saveMoves(textField.getText());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -64,7 +64,7 @@ public class UserInput extends JFrame {
 		JButton btnLoad = new JButton("Load");
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pGame.loadGame(lblChessgame.getText());
+				pGame.loadGame(textField.getText());
 			}
 		});
 		btnLoad.setBounds(59, 113, 117, 29);

@@ -35,6 +35,7 @@ public class Game {
 		_writer.writeInFile(move);
 		cont++;
 		}
+		_writer.closeFile();
 	}
 	public void loadGame(String pFile){
 		int total = _move.size();
